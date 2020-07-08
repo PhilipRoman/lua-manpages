@@ -1,0 +1,68 @@
+= pairs(3lua)
+
+:doctype: manpage
+
+== Name
+
+pairs, ipairs, next - iterate over tables
+
+== Synopsis
+
+`*pairs*(_t_)`
+
+`*ipairs*(_t_)`
+
+== Description
+
+*pairs*(_t_) returns values suitable for iteration over keys and values 
+of table _t_. If _t_ has a metamethod pass:[__]pairs, calls it with 
+_t_ as argument and returns the first three results from the call.
+Otherwise, returns three values: the *next*(3lua) function, the table 
+_t_, and nil, so that the construction
+[source,lua]
+[subs=+quotes]
+----
+for k,v in pairs(__t__) do __body__ end
+----
+will iterate over all 
+key–value pairs of table _t_. See function *next*(3lua) for the caveats 
+of modifying the table during its traversal.
+
+*ipairs*(_t_) returns three values (an iterator function, the table _t_,
+and 0) so that the construction
+[source,lua]
+[subs=+quotes]
+----
+for i,v in ipairs(__t__) do __body__ end
+----
+will iterate over the key–value pairs (1, _t_[1]), (2, _t_[2]), ..., 
+up to the first nil value.
+
+In version 5.2, if _t_ has a metamethod "pass:[__]ipairs", *ipairs*() 
+calls it with _t_ as argument and returns the first three results from 
+the call.
+
+Since version 5.3, *ipairs*() respects metamethods of table _t_ and 
+the "pass:[__]ipairs" metamethod has been deprecated.
+
+*next*()
+
+== Conforming To
+
+Functions *pairs*() and *ipairs*() are available in versions
+starting from Lua 5.0. Obvious restrictions, such as the lack of
+"pass:[__]pairs" metamethod apply in older versions.
+
+In versions prior to 5.0, table iteration can be done using functions 
+*foreach*(3lua) and *foreachi*(3lua).
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+foreach(3lua) foreachi(3lua)

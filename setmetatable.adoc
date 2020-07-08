@@ -1,0 +1,43 @@
+= setmetatable(3lua)
+
+:doctype: manpage
+
+== Name
+
+setmetatable, getmetatable - query and replace the metatable of objects
+
+== Synopsis
+
+`*setmetatable*(_table_, _metatable_)`
+
+`*getmetatable*(_object_)`
+
+== Description
+
+*setmetatable*() sets the metatable for the given table. (To change 
+the metatable of other types from Lua code, you must use the 
+*debug*(3lua) library). If metatable is nil, removes the metatable of 
+the given table. If the original metatable has a "pass:[__]metatable" 
+field, raises an error. This function returns _table_.
+
+*getmetatable*() returns nil if the object does not have a metatable. 
+Otherwise, if the object's metatable has a "pass:[__]metatable" field, 
+returns the associated value. Otherwise, returns the metatable of the 
+given object.
+
+== Conforming To
+
+Functions *setmetatable*() and *getmetatable*() for tables are available 
+in versions starting from Lua 5.0. Metatables for other types are 
+available starting from Lua 5.1.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+debug(3lua)

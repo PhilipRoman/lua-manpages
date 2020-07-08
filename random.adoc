@@ -1,0 +1,46 @@
+= math.random(3lua)
+
+:doctype: manpage
+
+== Name
+
+math.random, math.randomseed - random number generation library
+
+== Synopsis
+[subs=+quotes]
+----
+*math.random*([_m_ [, _n_]])
+*math.randomseed*(_x_)
+----
+== Description
+
+*math.random*([_m_ [, _n_]]), when called without arguments, returns a 
+pseudo-random float with uniform distribution in the range [0,1). When 
+called with two integers _m_ and _n_, math.random returns a 
+pseudo-random integer with uniform distribution in the range [_m_, 
+_n_]. (The value _n_-_m_ cannot be negative and must fit in a Lua 
+integer.) The call math.random(_n_) is equivalent to 
+math.random(1,_n_).
+
+This function is an interface to the underling pseudo-random generator 
+function provided by C (See *random*(3)).
+
+*math.randomseed*(_x_) sets _x_ as the "seed" for the pseudo-random 
+generator: equal seeds produce equal sequences of numbers. In Lua 5.4, 
+the random number seed is initially set to a somewhat random value and 
+*math.random* uses a different algorithm.
+
+== Conforming To
+
+*random* and *randomseed* are available since Lua 3.2.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+HUGE_VAL(3)

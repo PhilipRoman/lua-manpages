@@ -1,0 +1,143 @@
+= math(3lua)
+
+:doctype: manpage
+
+== Name
+
+math, math.abs, math.ceil, math.exp, math.floor, math.fmod, 
+math.frexp, math.huge, math.ldexp, math.log, math.log10, 
+math.maxinteger, math.min, math.mininteger, math.mod, math.modf, 
+math.pow, math.sqrt, math.tointeger, math.type, math.ult - basic 
+mathematical functions and constants
+
+== Synopsis
+Exponential/power functions
+[subs=+quotes]
+----
+*math.sqrt*(_x_)
+*math.exp*(_x_)
+*math.log*(_x_ [,_base_])
+*math.log10*(_x_)
+*math.pow*(_x_, _y_)
+*math.ldexp*(_m_, _e_)
+*math.frexp*(_x_)
+----
+Constants
+[subs=+quotes]
+----
+*math.pi*
+*math.huge*
+*math.maxinteger*
+*math.mininteger*
+----
+Number type functions
+[subs=+quotes]
+----
+*math.tointeger*(_x_)
+*math.type*(_x_)
+----
+Other functions
+[subs=+quotes]
+----
+*math.ult*(_m_, _n_)
+
+*math.mod*(_x_, _y_)
+*math.fmod*(_x_, _y_)
+*math.modf*(_x_, _y_)
+
+*math.abs*(_x_)
+
+*math.floor*(_x_)
+*math.ceil*(_x_)
+
+*math.max*(_x_, _..._)
+*math.min*(_x_, _..._)
+----
+== Description
+
+This library provides basic mathematical functions. It provides all 
+its functions and constants inside the table math. For version Lua 5.3 
+or above, functions with the annotation "integer/float" give integer 
+results for integer arguments and float results for float (or mixed) 
+arguments. Rounding functions (math.ceil, math.floor, and math.modf) 
+return an integer when the result fits in the range of an integer, or 
+a float otherwise.
+
+*math.sqrt*(_x_) returns the square root of _x_. (You can also use the 
+expression _x_^0.5 to compute this value.)
+
+*math.exp*(_x_) returns the value e^_x_ (where e is the base of 
+natural logarithms).
+
+*math.log*(_x_ [,_base_]) returns the logarithm of _x_ in the given 
+base. The default for base is e (so that the function returns the 
+natural logarithm of _x_).
+*math.log10*(_x_) is equivalent to *math.log*(_x_, 10). This function 
+has been deprecated in Lua 5.2 and removed in Lua 5.4.
+
+*math.ldexp*(_m_, _e_) returns _m_×(2^_e_) (_e_ should be an integer). 
+
+*math.frexp*(_x_) Returns _m_ and _e_, such that _x_ = 
+_m_×(2^_e_), _e_ is an integer and the absolute value of _m_ is in 
+the range [0.5, 1) (or zero when _x_ is zero).
+
+The functions *math.ldexp* and *math.frexp* have been deprecated in 
+Lua 5.3 and removed in Lua 5.4.
+
+*math.huge* is the float value *HUGE_VAL*(3), a value larger than any 
+other numeric value.
+
+*math.maxinteger* is an integer with the maximum value for an integer.
+*math.mininteger* is an integer with the minimum value for an integer.
+
+*math.maxinteger* and *math.mininteger* were added in Lua 5.3.
+
+*math.tointeger*(_x_), if the value _x_ is convertible to an integer, 
+returns that integer. Otherwise, returns nil.
+
+*math.type*(_x_) returns the string "integer" if _x_ is an integer, the 
+string "float" if it is a float, or nil if _x_ is not a number.
+
+*math.ult*(_m_, _n_) returns a boolean, true if and only if integer 
+_m_ is below integer _n_ when they are compared as unsigned integers.
+
+*math.fmod*(_x_, _y_) returns the remainder of the division of _x_ by 
+_y_ that rounds the quotient towards zero. (integer/float)
+*math.mod* is the old name of *math.fmod* in versions before 5.1.
+
+*math.modf*(_x_) Returns the integral part of _x_ and the fractional part 
+of _x_. Its second result is always a float.
+
+*math.abs*(_x_) returns the absolute value of _n_. (integer/float)
+
+*math.floor*(_x_) returns the largest integral value smaller than or 
+equal to _x_.
+*math.ceil*(_x_) returns the smallest integral value larger than or 
+equal to _x_. In Lua 5.3, these functions return an integer when the 
+result fits in the range of an integer, or a float otherwise.
+
+*math.max*(_x_, _..._) Returns the argument with the maximum value, 
+according to the Lua operator <. (integer/float)
+*math.min*(_x_, _..._) Returns the argument with the minimum value, 
+according to the Lua operator <. (integer/float)
+
+== Conforming To
+
+Functions *math.pow*, *math.frexp* and *math.ldexp* have been 
+deprecated in Lua 5.3 and removed in Lua 5.4.
+
+Function *math.mod* was renamed to *math.fmod* in Lua 5.1.
+
+Function *math.log10* was deprecated in Lua 5.2 and removed in Lua 
+5.4. Use *math.log* with 10 as its second argument instead.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+HUGE_VAL(3)

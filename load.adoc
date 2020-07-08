@@ -1,0 +1,99 @@
+= pairs(3lua)
+
+:doctype: manpage
+
+== Name
+
+load, loadfile, dofile, loadstring - execute Lua code
+
+== Synopsis
+
+[subs=+quotes]
+----
+*load*(_chunk_ [, _chunkname_ [, _mode_ [, _env_]]])
+*loadfile*([_filename_ [, _mode_ [, _env_]]])
+*dofile*([_filename_])
+*loadstring*(_string_ [, _chunkname_])
+
+----
+
+== Description
+
+*load*() loads a chunk.
+
+If _chunk_ is a string, the chunk is this string. If _chunk_ is a 
+function, load calls it repeatedly to get the chunk pieces. Each call 
+to _chunk_ must return a string that concatenates with previous results. 
+A return of an empty string, nil, or no value signals the end of the 
+chunk.
+
+If there are no syntactic errors, returns the compiled chunk as a 
+function; otherwise, returns nil plus the error message.
+
+If the resulting function has upvalues, the first upvalue is set to 
+the value of env, if that parameter is given, or to the value of the 
+global environment. Other upvalues are initialized with nil. (When you 
+load a main chunk, the resulting function will always have exactly one 
+upvalue, the *pass:[_]ENV* variable (see *pass:[_]ENV*(3lua)). 
+However, when you load a binary chunk created from a function (see 
+*string.dump*(3lua)), the resulting function can have an arbitrary 
+number of upvalues.) All upvalues are fresh, that is, they are not 
+shared with any other function.
+
+_chunkname_ is used as the name of the chunk for error messages and 
+debug information (see debug(3lua)). When absent, it defaults to 
+chunk, if chunk is a string, or to "=(load)" otherwise.
+
+The string _mode_ controls whether the chunk can be text or binary (that 
+is, a precompiled chunk). It may be the string "b" (only binary 
+chunks), "t" (only text chunks), or "bt" (both binary and text). The 
+default is "bt".
+
+Lua does not check the consistency of binary chunks. Maliciously 
+crafted binary chunks can crash the interpreter.
+
+
+*loadfile*() is similar to load, but gets the chunk from file filename 
+or from the standard input, if no file name is given.
+
+
+*dofile*() opens the named file and executes its contents as a Lua 
+chunk. When called without arguments, *dofile*() executes the contents 
+of the standard input (stdin). Returns all values returned by the 
+chunk. In case of errors, *dofile*() propagates the error to its 
+caller (that is, *dofile*() does not run in protected mode).
+
+
+*loadstring*() is similar to *load*(), but gets the chunk from the 
+given string. To load and run a given string, use the idiom
+[subs=+quotes]
+----
+*assert*(*loadstring*(_s_))()
+----
+When absent, _chunkname_ defaults to the given string.
+
+== Conforming To
+
+*load*() is available since Lua 5.0.
+
+*loadfile*() is available since Lua 4.0.
+
+The parameters _mode_ and _env_ for *load*() and *loadfile*() are 
+available since Lua 5.2.
+
+*dofile*() is available since at least Lua 2.2, possibly 
+earlier.
+
+*loadstring*() is available from Lua 5.0 to Lua 5.2, in which it was 
+deprecated and then removed in Lua 5.3.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+foreach(3lua) foreachi(3lua)

@@ -1,0 +1,77 @@
+= table.insert(3lua)
+
+:doctype: manpage
+
+== Name
+
+table.insert, table.move, table.remove, table.sort - table editing 
+functions
+
+== Synopsis
+
+[subs=+quotes]
+----
+*table.insert*(_list_, [_pos_,] _value_)
+*table.move*(_a1_, _f_, _e_, _t_ [,_a2_])
+*table.remove*(_list_ [,_pos_])
+*table.sort*(_list_ [,_comp_])
+----
+== Description
+
+*table.insert* inserts element _value_ at position _pos_ in list, 
+shifting up the elements _list_[_pos_], _list_[_pos_+1], ..., 
+_list_[pass:[#]_list_].
+
+The default value for _pos_ is pass:[#]_list_+1, so that a call 
+*table.insert*(_t_, _x_) inserts _x_ at the end of list _t_.
+
+*table.move* moves elements from table _a1_ to table _a2_, performing 
+the equivalent to the following multiple assignment: _a2_[_t_],... = 
+_a1_[_f_], ..., _a1_[_e_]. The default for _a2_ is _a1_. The 
+destination range can overlap with the source range. The number of 
+elements to be moved must fit in a Lua integer.
+*table.move* returns the destination table _a2_.
+
+*table.remove* Removes from _list_ the element at position _pos_, 
+returning the value of the removed element. When _pos_ is an integer 
+between 1 and pass:[#]_list_, it shifts down the elements 
+_list_[_pos_+1], _list_[_pos_+2], ..., _list_[pass:[#]_list_] and 
+erases element _list_[pass:[#]_list_]; The index _pos_ can also be 0 when 
+pass:[#]_list_ is 0, or pass:[#]_list_ + 1; in those cases, the function erases 
+the element _list_[_pos_].
+
+The default value for _pos_ is pass:[#]_list_, so that a call 
+*table.remove*(_list_) removes the last element of _list_.
+
+*table.sort* sorts list elements in a given order, in-place, from 
+_list_[1] to _list_[pass:[#]_list_]. If _comp_ is given, then it must be 
+a function that receives two list elements and returns true when the 
+first element must come before the second in the final order (so that, 
+after the sort, _i_ < _j_ implies not 
+_comp_(_list_[_j_],_list_[_i_])). If _comp_ is not given, then the 
+standard Lua operator < is used instead.
+
+Note that the _comp_ function must define a strict partial order over 
+the elements in the list; that is, it must be asymmetric and 
+transitive. Otherwise, no valid sort may be possible.
+
+The sort algorithm is not stable: elements considered equal by the 
+given order may have their relative positions changed by the sort.
+
+== Conforming To
+
+*table.move* is available since Lua 5.3.
+
+*table.insert*, *table.move* and *table.remove* are available since 
+Lua 5.0.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+table(3lua)

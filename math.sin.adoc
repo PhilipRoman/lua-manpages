@@ -1,0 +1,81 @@
+= math.sin(3lua)
+
+:doctype: manpage
+
+== Name
+
+math.acos, math.asin, math.atan, math.atan2, math.cos, math.cosh, 
+math.deg, math.pi, math.rad, math.sin, math.sinh, math.tan, math.tanh 
+- trigonometric functions and constants
+
+== Synopsis
+[subs=+quotes]
+----
+*math.cos*(_x_)   *math.cosh*(_x_)   *math.acos*(_x_)
+*math.sin*(_x_)   *math.sinh*(_x_)   *math.asin*(_x_)
+*math.tan*(_x_)   *math.tanh*(_x_)   *math.atan*(_y_ [,_x_]) 
+
+*math.atan2*(_y_ [,_x_])
+
+*math.deg*(_x_)
+*math.rad*(_x_)
+
+*math.pi*
+----
+== Description
+
+*math.cos*(_x_) returns the cosine of _x_ (assumed to be in radians).
+
+*math.sin*(_x_) returns the sine of _x_ (assumed to be in radians).
+
+*math.tan*(_x_) returns the tangent of _x_ (assumed to be in radians).
+
+*math.acos*(_x_) returns the arc cosine of _x_ (in radians).
+
+*math.asin*(_x_) returns the arc sine of _x_ (in radians).
+
+*math.atan*(_y_ [,_x_]) returns the arc tangent of _y_/_x_ (in radians), 
+but uses the signs of both arguments to find the quadrant of the 
+result. (It also handles correctly the case of _x_ being zero.) The 
+default value for _x_ is 1, so that the call "math.atan(_y_)" returns 
+the arc tangent of _y_.
+
+Before Lua 5.3, the one-argument and two-argument variants of 
+*math.atan* are separate functions: *math.atan* and *math.atan2*, 
+respectively.
+
+*math.cosh*(_x_) returns the hyperbolic cosine of _x_.
+
+*math.sinh*(_x_) returns the hyperbolic sine of _x_.
+
+*math.tanh*(_x_) returns the hyperbolic tangent of _x_.
+
+The functions *math.atan2*, *math.cosh*, *math.sinh* and *math.tanh* 
+are deprecated in Lua 5.3 and removed in Lua 5.4.
+
+*math.deg*(_x_) converts the angle _x_ from radians to degrees.
+
+*math.rad*(_x_) converts the angle _x_ from degrees to radians.
+
+*math.pi* is the value of π (3.1415926535898).
+
+== Conforming To
+
+The following functions have been deprecated in Lua 5.3 and removed in 
+Lua 5.4: *math.atan2*, *math.cosh*, *math.sinh*, *math.tanh*.
+
+Since Lua 5.0, trigonometric functions work with radians, while older 
+Lua versions used degrees.
+
+*math.pi* is available since Lua 5.0.
+
+== Author
+
+include::include/authors[]
+
+== Colophon
+
+include::include/colophon[]
+
+== See Also
+HUGE_VAL(3)
